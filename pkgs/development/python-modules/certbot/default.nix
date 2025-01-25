@@ -4,7 +4,6 @@
   python,
   runCommand,
   fetchFromGitHub,
-  fetchpatch,
   configargparse,
   acme,
   configobj,
@@ -33,15 +32,6 @@ buildPythonPackage rec {
     tag = "v${version}";
     hash = "sha256-lYGJgUNDzX+bE64GJ+djdKR+DXmhpcNbFJrAEnP86yQ=";
   };
-
-  patches = [
-    (fetchpatch {
-      name = "CSR_support_in_pyOpenSSL_is_deprecated.patch";
-      url = "https://github.com/certbot/certbot/commit/f005045d87b25f1922774685646e57765aa202ad.patch";
-      includes = [ "pytest.ini" ];
-      hash = "sha256-YcQbZb7DLU+AXxNyqJRYZIC18DuT6X8kGbfdYtUrHiA=";
-    })
-  ];
 
   postPatch = "cd ${pname}"; # using sourceRoot would interfere with patches
 
