@@ -16,7 +16,8 @@ buildPythonPackage rec {
   disabled = pythonOlder "3.8";
 
   src = fetchPypi {
-    inherit pname version;
+    pname = "azure_cosmos";
+    inherit version;
     hash = "sha256-xw20y/VbD/Jh7Xu4qjJaXfpWXTxuqkPXXSauXirW108=";
   };
 
