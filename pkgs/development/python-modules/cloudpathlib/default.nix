@@ -5,6 +5,7 @@
   fetchFromGitHub,
   flit-core,
   typing-extensions,
+  azure-identity,
   azure-storage-blob,
   azure-storage-file-datalake,
   google-cloud-storage,
@@ -34,6 +35,12 @@ buildPythonPackage rec {
     hash = "sha256-821uSJL1QSj1BTdNWyisN8WWomMuXO3HF6IsAdw7Lac=";
   };
 
+  postPatch = ''
+    # missing pytest-reportlog test dependency
+    substituteInPlace pyproject.toml \
+      --replace-fail "--report-log reportlog.jsonl" ""
+  '';
+
   build-system = [ flit-core ];
 
   dependencies = lib.optional (pythonOlder "3.11") typing-extensions;
@@ -51,6 +58,7 @@ buildPythonPackage rec {
   pythonImportsCheck = [ "cloudpathlib" ];
 
   nativeCheckInputs = [
+    azure-identity
     psutil
     pydantic
     pytestCheckHook
