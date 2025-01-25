@@ -17,13 +17,14 @@ buildPythonPackage rec {
   disabled = pythonOlder "3.8";
 
   src = fetchPypi {
-    inherit pname version;
+    pname = "azure_mgmt_datafactory";
+    inherit version;
     hash = "sha256-oVqOTpYnoaEMGZbqrpnxNlPIl+h582S7k3ijPC4RTIw=";
   };
 
-  nativeBuildInputs = [ setuptools ];
+  build-system = [ setuptools ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     azure-common
     azure-mgmt-core
     isodate
