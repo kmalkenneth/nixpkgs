@@ -6,26 +6,29 @@
   fetchPypi,
   isodate,
   pythonOlder,
-  typing-extensions,
+  setuptools,
 }:
 
 buildPythonPackage rec {
   pname = "azure-mgmt-redhatopenshift";
   version = "2.0.0";
-  format = "setuptools";
+  pyproject = true;
 
   disabled = pythonOlder "3.7";
 
   src = fetchPypi {
-    inherit pname version;
+    pname = "azure_mgmt_redhatopenshift";
+    inherit version;
     hash = "sha256-nTBKy7p8n0JWEmn3ByEKranHteoJkPJyLfYFmaCOOq4=";
   };
 
-  propagatedBuildInputs = [
+  build-system = [ setuptools ];
+
+  dependencies = [
     isodate
     azure-common
     azure-mgmt-core
-  ] ++ lib.optionals (pythonOlder "3.8") [ typing-extensions ];
+  ];
 
   pythonNamespaces = "azure.mgmt";
 
