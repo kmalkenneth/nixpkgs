@@ -7783,8 +7783,6 @@ self: super: with self; {
 
   luqum = callPackage ../development/python-modules/luqum { };
 
-  luxor = callPackage ../development/python-modules/luxor { };
-
   luxtronik = callPackage ../development/python-modules/luxtronik { };
 
   lupa = callPackage ../development/python-modules/lupa { };
