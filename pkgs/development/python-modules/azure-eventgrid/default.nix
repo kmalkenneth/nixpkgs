@@ -17,7 +17,8 @@ buildPythonPackage rec {
   disabled = pythonOlder "3.8";
 
   src = fetchPypi {
-    inherit pname version;
+    pname = "azure_eventgrid";
+    inherit version;
     hash = "sha256-HE1/HPqaJrMVjPrlZn7lmd8wvXZ6Kq9k/CMfdBlTzgE=";
   };
 
