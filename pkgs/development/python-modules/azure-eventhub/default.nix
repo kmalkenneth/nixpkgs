@@ -16,7 +16,8 @@ buildPythonPackage rec {
   disabled = pythonOlder "3.8";
 
   src = fetchPypi {
-    inherit pname version;
+    pname = "azure_eventhub";
+    inherit version;
     hash = "sha256-rqM6CrT4ycIhLkVcRRi+mobAAVymMBms/Fd4qxkHjPA=";
   };
 
