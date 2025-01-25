@@ -27,11 +27,6 @@ buildPythonPackage rec {
     })
   ];
 
-  postPatch = ''
-    substituteInPlace pyproject.toml \
-      --replace-fail ', "certifi", "cmake"' ""
-  '';
-
   build-system = [
     setuptools
     setuptools-scm
