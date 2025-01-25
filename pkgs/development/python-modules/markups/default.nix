@@ -2,7 +2,7 @@
   lib,
   buildPythonPackage,
   docutils,
-  fetchPypi,
+  fetchFromGitHub,
   importlib-metadata,
   markdown,
   pygments,
@@ -21,15 +21,16 @@ buildPythonPackage rec {
 
   disabled = pythonOlder "3.7";
 
-  src = fetchPypi {
-    pname = "Markups";
-    inherit version;
-    hash = "sha256-JSFENPNW01MDTC7023arUOhnpjuhln62vMgEcsUB3dk=";
+  src = fetchFromGitHub {
+    owner = "retext-project";
+    repo = "pymarkups";
+    tag = version;
+    hash = "sha256-7/pXCSbVhLeX7PhacMQYwYMT7Og/tZplPPCvWDxJFck=";
   };
 
-  nativeBuildInputs = [ setuptools ];
+  build-system = [ setuptools ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     docutils
     markdown
     pygments
