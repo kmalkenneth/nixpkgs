@@ -2,11 +2,18 @@
   lib,
   buildPythonPackage,
   fetchFromGitHub,
+
+  # build-system
   poetry-core,
   setuptools,
+
+  # dependencies
   asgiref,
   django,
+  django-tree-queries,
   strawberry-graphql,
+
+  # optional-dependencies
   django-debug-toolbar,
   django-choices-field,
 
@@ -44,8 +51,15 @@ buildPythonPackage rec {
   dependencies = [
     asgiref
     django
+    django-tree-queries
     strawberry-graphql
   ];
+
+  optional-dependencies = {
+    debug-toolbar = [ django-debug-toolbar ];
+    enum = [ django-choices-field ];
+  };
+
 
   nativeCheckInputs = [
     pytestCheckHook
@@ -63,11 +77,6 @@ buildPythonPackage rec {
   ] ++ optional-dependencies.debug-toolbar ++ optional-dependencies.enum;
 
   pythonImportsCheck = [ "strawberry_django" ];
-
-  optional-dependencies = {
-    debug-toolbar = [ django-debug-toolbar ];
-    enum = [ django-choices-field ];
-  };
 
   meta = {
     description = "Strawberry GraphQL Django extension";
