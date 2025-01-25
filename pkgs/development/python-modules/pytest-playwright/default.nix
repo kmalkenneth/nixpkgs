@@ -26,6 +26,10 @@ buildPythonPackage rec {
     hash = "sha256-/FTAnnVDf9fonNme5SM+9EKa39DtF64pclCts6tTjz0=";
   };
 
+  postPatch = ''
+    pushd pytest-playwright
+  '';
+
   build-system = [
     setuptools
     setuptools-scm
@@ -44,6 +48,7 @@ buildPythonPackage rec {
   doCheck = false;
 
   preCheck = ''
+    popd
     export PLAYWRIGHT_BROWSERS_PATH=${playwright-driver.browsers}
   '';
 
