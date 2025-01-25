@@ -96,6 +96,8 @@ buildPythonPackage rec {
       # RuntimeError: Dynamo is not supported on Python 3.13+
       "test_can_unwrap_distributed_compiled_model_keep_torch_compile"
       "test_can_unwrap_distributed_compiled_model_remove_torch_compile"
+      "test_convert_to_fp32"
+      "test_send_to_device_compiles"
     ]
     ++ lib.optionals (stdenv.hostPlatform.isLinux && stdenv.hostPlatform.isAarch64) [
       # usual aarch64-linux RuntimeError: DataLoader worker (pid(s) <...>) exited unexpectedly
