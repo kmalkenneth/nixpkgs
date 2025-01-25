@@ -5,6 +5,8 @@
   pytestCheckHook,
   pythonOlder,
   pytest-asyncio,
+  pytest-benchmark,
+  pytest-cov-stub,
   typing-extensions,
 }:
 
@@ -24,11 +26,12 @@ buildPythonPackage rec {
 
   nativeCheckInputs = [
     pytest-asyncio
+    pytest-benchmark
+    pytest-cov-stub
     pytestCheckHook
   ];
 
-  # also fails upstream: https://github.com/aio-libs/janus/pull/258
-  disabledTests = [ "test_format" ];
+  pytestFlagsArray = [ "--benchmark-disable" ];
 
   meta = with lib; {
     description = "Mixed sync-async queue";
