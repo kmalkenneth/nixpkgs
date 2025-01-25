@@ -27,13 +27,6 @@ buildPythonPackage rec {
     hash = "sha256-TyyB0kPGX517fe0rI4T+VkSnFvTRCFR06BLwo67X9zQ=";
   };
 
-  postPatch = ''
-    # See https://github.com/numpy/numpy/issues/21079
-    # has no functional difference as the name is only used in log output
-    substituteInPlace blis/benchmark.py \
-      --replace-fail 'numpy.__config__.blas_ilp64_opt_info["libraries"]' '["dummy"]'
-  '';
-
   preCheck = ''
     # remove src module, so tests use the installed module instead
     rm -rf ./blis
