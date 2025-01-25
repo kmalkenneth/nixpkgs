@@ -3697,6 +3697,8 @@ self: super: with self; {
 
   django-tinymce = callPackage ../development/python-modules/django-tinymce { };
 
+  django-tree-queries = callPackage ../development/python-modules/django-tree-queries { };
+
   django-treebeard = callPackage ../development/python-modules/django-treebeard { };
 
   django-two-factor-auth = callPackage ../development/python-modules/django-two-factor-auth { };
