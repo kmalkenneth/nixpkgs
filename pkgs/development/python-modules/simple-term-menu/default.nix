@@ -1,7 +1,7 @@
 {
   lib,
   buildPythonPackage,
-  fetchPypi,
+  fetchFromGitHub,
   setuptools,
 }:
 
@@ -10,9 +10,11 @@ buildPythonPackage rec {
   version = "1.6.6";
   pyproject = true;
 
-  src = fetchPypi {
-    inherit pname version;
-    hash = "sha256-mBPTb1dJ1i0gClWZseyIRpxxN4MSrcCEwAwAv7s4OJM=";
+  src = fetchFromGitHub {
+    owner = "IngoMeyer441";
+    repo = "simple-term-menu";
+    tag = "v${version}";
+    hash = "sha256-nfMqtyUalt/d/wTyRUlu5x4Q349ARY8hDMi8Ui4cTI4=";
   };
 
   nativeBuildInputs = [ setuptools ];
