@@ -11,12 +11,15 @@ buildPythonPackage rec {
   version = "0.1.5";
   pyproject = true;
 
+  # no tags on git
   src = fetchPypi {
-    inherit pname version;
+    pname = "loguru_logging_intercept";
+    inherit version;
     hash = "sha256-WBA4vxMQ+7Bs2kivvTc+crvAHVHE3wWPSQgat6fF+YQ=";
   };
 
   build-system = [ setuptools ];
+
   dependencies = [ loguru ];
 
   pythonImportsCheck = [ "loguru_logging_intercept" ];
