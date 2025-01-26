@@ -10,7 +10,7 @@
 buildPythonPackage rec {
   pname = "diceware";
   version = "1.0.1";
-  format = "setuptools";
+  pyproject = true;
 
   disabled = pythonOlder "3.7";
 
@@ -19,12 +19,9 @@ buildPythonPackage rec {
     hash = "sha256-VLaQgJ8MVqswhaGOFaDDgE1KDRJ/OK7wtc9fhZ0PZjk=";
   };
 
-  postPatch = ''
-    substituteInPlace setup.py \
-      --replace "'pytest_runner'," ""
-  '';
+  build-system = [ setuptools ];
 
-  propagatedBuildInputs = [ setuptools ];
+  dependencies = [ setuptools ];
 
   nativeCheckInputs = [ pytestCheckHook ];
 
