@@ -19,12 +19,6 @@ buildPythonPackage rec {
     hash = "sha256-Xa+rdAWd5OePSfa1aE7drm585G8Jz6BZwdEznoseoKY=";
   };
 
-  patches = [
-    # cherry-picked from https://github.com/biopython/biopython/commit/3f9bda7ef44f533dadbaa0de29ac21929bc0b2f1
-    # fixes SeqXMLIO parser to process all data. remove on next update
-    ./close_parser_on_time.patch
-  ];
-
   build-system = [ setuptools ];
 
   dependencies = [ numpy ];
