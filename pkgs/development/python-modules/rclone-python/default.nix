@@ -1,7 +1,8 @@
 {
   lib,
   buildPythonPackage,
-  fetchPypi,
+  fetchFromGitHub,
+  setuptools,
   rich,
   rclone,
 }:
@@ -9,14 +10,18 @@
 buildPythonPackage rec {
   pname = "rclone-python";
   version = "0.1.20";
-  format = "setuptools";
+  pyproject = true;
 
-  src = fetchPypi {
-    inherit pname version;
-    sha256 = "sha256-qkK6Hvitn6v7F1d5E4rX64Tcm81LIDoyPaj/eA/EtHQ=";
+  src = fetchFromGitHub {
+    owner = "Johannes11833";
+    repo = "rclone_python";
+    tag = "v${version}";
+    hash = "sha256-TGSASkvlh4ku7gZ7JhKX5yEKgSZp5VDyNz962gG6Lk0=";
   };
 
-  propagatedBuildInputs = [
+  build-system = [ setuptools ];
+
+  dependencies = [
     rclone
     rich
   ];
@@ -27,6 +32,7 @@ buildPythonPackage rec {
   pythonImportsCheck = [ "rclone_python" ];
 
   meta = {
+    changelog = "https://github.com/Johannes11833/rclone_python/releases/tag/${src.tag}";
     description = "Python wrapper for rclone";
     homepage = "https://github.com/Johannes11833/rclone_python";
     license = lib.licenses.mit;
