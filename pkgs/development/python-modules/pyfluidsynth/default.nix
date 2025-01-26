@@ -3,7 +3,6 @@
   buildPythonPackage,
   fetchPypi,
   setuptools,
-  wheel,
   numpy,
   fluidsynth,
   stdenv,
@@ -15,24 +14,22 @@ buildPythonPackage rec {
   format = "pyproject";
 
   src = fetchPypi {
-    pname = "pyFluidSynth";
-    inherit version;
+    inherit pname version;
     hash = "sha256-ynQcJity5IljFJxzv4roDkXITCPJvfgDomujJMuy1bI=";
   };
 
-  nativeBuildInputs = [
-    setuptools
-    wheel
-  ];
+  postPatch = ''
+    substituteInPlace fluidsynth.py \
+      --replace-fail \
+        "find_library(lib_name)" \
+        '"${lib.getLib fluidsynth}/lib/libfluidsynth${stdenv.hostPlatform.extensions.sharedLibrary}"'
+  '';
 
-  propagatedBuildInputs = [ numpy ];
+  build-system = [ setuptools ];
+
+  dependencies = [ numpy ];
 
   pythonImportsCheck = [ "fluidsynth" ];
-
-  postPatch = ''
-    sed -Ezi fluidsynth.py -e \
-      's|lib = .*\\\n[^\n]*|lib = "${lib.getLib fluidsynth}/lib/libfluidsynth${stdenv.hostPlatform.extensions.sharedLibrary}"|'
-  '';
 
   meta = with lib; {
     description = "Python bindings for FluidSynth, a MIDI synthesizer that uses SoundFont instruments";
