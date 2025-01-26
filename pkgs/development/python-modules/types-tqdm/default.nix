@@ -4,6 +4,7 @@
   pythonOlder,
   fetchPypi,
   setuptools,
+  types-requests,
 }:
 
 buildPythonPackage rec {
@@ -14,11 +15,14 @@ buildPythonPackage rec {
   disabled = pythonOlder "3.8";
 
   src = fetchPypi {
-    inherit pname version;
+    pname = "types_tqdm";
+    inherit version;
     hash = "sha256-5WBGYxBWkiOFq+ia6xivVhH0cerdeRigrX802EzUyMw=";
   };
 
   build-system = [ setuptools ];
+
+  dependencies = [ types-requests ];
 
   # This package does not have tests.
   doCheck = false;
