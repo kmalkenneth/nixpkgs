@@ -11,11 +11,12 @@ buildPythonPackage rec {
   pyproject = true;
 
   src = fetchPypi {
-    inherit pname version;
+    pname = "types_tabulate";
+    inherit version;
     hash = "sha256-rBrBdHUMCjhd/SSO3GJ5+jKKr06jF5FauHmi7EeDMjA=";
   };
 
-  nativeBuildInputs = [ setuptools ];
+  build-system = [ setuptools ];
 
   # Module doesn't have tests
   doCheck = false;
