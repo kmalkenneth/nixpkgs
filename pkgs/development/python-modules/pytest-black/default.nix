@@ -14,21 +14,23 @@ buildPythonPackage rec {
   format = "setuptools";
 
   src = fetchPypi {
-    inherit pname version;
+    pname = "pytest_black";
+    inherit version;
     sha256 = "sha256-7Ld0VfN5gFy0vY9FqBOjdUw7vuMZmt8bNmXA39CGtRE=";
   };
 
-  nativeBuildInputs = [ setuptools-scm ];
+  build-system = [ setuptools-scm ];
 
   buildInputs = [ pytest ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     black
     toml
   ];
 
   # does not contain tests
   doCheck = false;
+
   pythonImportsCheck = [ "pytest_black" ];
 
   meta = with lib; {
