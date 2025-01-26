@@ -28,6 +28,8 @@ buildPythonPackage rec {
 
   postPatch = ''
     pushd pytest-playwright
+
+    substituteInPlace pyproject.toml --replace-fail "==" ">="
   '';
 
   build-system = [
