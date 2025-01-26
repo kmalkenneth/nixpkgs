@@ -3,7 +3,7 @@
   anyio,
   buildPythonPackage,
   fetchFromGitHub,
-  paho-mqtt,
+  paho-mqtt_2,
   poetry-core,
   poetry-dynamic-versioning,
   pytestCheckHook,
@@ -31,7 +31,7 @@ buildPythonPackage rec {
   ];
 
   dependencies = [
-    paho-mqtt
+    paho-mqtt_2
     typing-extensions
   ];
 
