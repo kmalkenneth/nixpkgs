@@ -2,17 +2,25 @@
   lib,
   buildPythonPackage,
   fetchFromGitHub,
-  numpy,
-  pybind11,
-  pytestCheckHook,
-  setuptools,
   pythonOlder,
+
+  # build-system
+  cmake,
+  ninja,
+  pybind11,
+  scikit-build-core,
+
+  # dependencies
+  numpy,
+
+  # tests
+  pytestCheckHook,
 }:
 
 buildPythonPackage rec {
   pname = "mapbox-earcut";
   version = "1.0.3";
-  format = "setuptools";
+  pyproject = true;
 
   disabled = pythonOlder "3.7";
 
@@ -23,12 +31,19 @@ buildPythonPackage rec {
     hash = "sha256-2dUZ78yWSudjozV2zIRNQgUeaNrkL+NXnF51q4T+dRU=";
   };
 
-  nativeBuildInputs = [
-    setuptools
+  build-system = [
     pybind11
+    scikit-build-core
   ];
 
-  propagatedBuildInputs = [ numpy ];
+  nativeBuildInputs = [
+    cmake
+    ninja
+  ];
+
+  dontUseCmakeConfigure = true;
+
+  dependencies = [ numpy ];
 
   nativeCheckInputs = [ pytestCheckHook ];
 
