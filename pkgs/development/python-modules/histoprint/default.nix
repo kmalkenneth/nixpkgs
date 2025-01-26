@@ -1,11 +1,11 @@
 {
   lib,
-  fetchPypi,
+  fetchFromGitHub,
   buildPythonPackage,
+  hatchling,
+  hatch-vcs,
   click,
   numpy,
-  setuptools,
-  setuptools-scm,
   uhi,
   pytestCheckHook,
 }:
@@ -13,19 +13,21 @@
 buildPythonPackage rec {
   pname = "histoprint";
   version = "2.6.0";
-  format = "pyproject";
+  pyproject = true;
 
-  src = fetchPypi {
-    inherit pname version;
-    sha256 = "sha256-4d9yk1BFW0V+l/IIg1N650Uih558M8YJ3xLyR8ykoh0=";
+  src = fetchFromGitHub {
+    owner = "scikit-hep";
+    repo = "histoprint";
+    tag = "v${version}";
+    hash = "sha256-qMg0Ct39BjdcyWB3KxG74rVqVW4I0DGZ5GS7D3uYq3w=";
   };
 
-  buildInputs = [
-    setuptools
-    setuptools-scm
+  build-system = [
+    hatchling
+    hatch-vcs
   ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     click
     numpy
     uhi
