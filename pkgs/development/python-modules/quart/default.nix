@@ -5,7 +5,7 @@
   pythonOlder,
 
   # build-system
-  poetry-core,
+  flit-core,
 
   # propagates
   aiofiles,
@@ -43,7 +43,7 @@ buildPythonPackage rec {
     hash = "sha256-NApev3nRBS4QDMGq8++rSmK5YgeljkaVAsdezsTbZr4=";
   };
 
-  build-system = [ poetry-core ];
+  build-system = [ flit-core ];
 
   dependencies =
     [
